@@ -1,0 +1,72 @@
+watchlist:
+  path: data/watchlist.txt
+  max_tickers: 50
+
+scheduler:
+  run_time: "09:35"           # 5 min after NYSE open (ET)
+  timezone: "America/New_York"
+  eod_report_time: "16:05"
+
+scoring:
+  technical_weight: 0.55
+  sentiment_weight: 0.45
+  min_composite_score: 0.35   # Minimum score to trigger a trade signal
+  sentiment_lookback_hours: 24
+  sentiment_decay_halflife_hours: 6
+
+technical:
+  historical_bars: 90         # Days of OHLCV history for TA
+  indicators:
+    rsi:
+      period: 14
+      weight: 0.20
+    macd:
+      fast: 12
+      slow: 26
+      signal: 9
+      weight: 0.25
+    ema_cross:
+      fast: 9
+      slow: 21
+      weight: 0.20
+    adx:
+      period: 14
+      threshold: 25
+      weight: 0.15
+    bbands:
+      period: 20
+      std: 2.0
+      weight: 0.20
+
+risk:
+  max_position_pct: 0.05      # Max 5% of portfolio per ticker
+  max_open_positions: 10
+  daily_loss_halt_pct: 0.02   # Halt trading at 2% daily drawdown
+  atr_multiplier: 1.5         # ATR-based stop loss multiplier
+  use_atr_sizing: true
+
+news:
+  rss_feeds:
+    - url: "https://feeds.finance.yahoo.com/rss/2.0/headline"
+      source: "yahoo_finance"
+    - url: "https://feeds.reuters.com/reuters/businessNews"
+      source: "reuters"
+  finnhub_ws_url: "wss://ws.finnhub.io"
+  max_articles_per_ticker: 20
+
+nlp:
+  model: "ProsusAI/finbert"
+  batch_size: 16
+  max_length: 512
+  device: "auto"              # "auto", "cpu", or "cuda"
+
+logging:
+  level: "INFO"
+  log_file: "logs/swing_bot.log"
+  max_bytes: 10485760         # 10 MB
+  backup_count: 5
+
+backtest:
+  start_date: "2022-01-01"
+  end_date: "2024-12-31"
+  initial_capital: 100000.0

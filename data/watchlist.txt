@@ -1,0 +1,31 @@
+# Swing-bot watchlist — one ticker per line
+# Lines starting with # are ignored
+
+# Tech
+AAPL
+MSFT
+NVDA
+GOOGL
+META
+AMZN
+AMD
+TSLA
+
+# Finance
+JPM
+BAC
+GS
+
+# Healthcare
+JNJ
+PFE
+UNH
+
+# Energy
+XOM
+CVX
+
+# ETFs
+SPY
+QQQ
+IWM
